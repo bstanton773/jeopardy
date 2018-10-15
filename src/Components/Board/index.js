@@ -20,8 +20,6 @@ export default class Board extends Component {
       name,
       score
     };
-    console.log(name + ": " + score);
-    console.log(newPlayer);
     e.target.elements.name.value = "";
     name ? this.addPlayer(newPlayer) : alert('Invalid Player');
   }
@@ -35,7 +33,7 @@ export default class Board extends Component {
     }))
   }
 
-  addScore = (e, points, player) => {
+  addScore = (e, points, player, id) => {
     
     var currentPlayerList = this.state.playerList.slice(0);
     currentPlayerList.forEach(e => { if(e.name === player){
@@ -43,6 +41,14 @@ export default class Board extends Component {
     }});
 
     this.setState({playerList: currentPlayerList});
+
+    const questionCard = document.getElementById(id)
+    questionCard.style.display = "none";
+  }
+
+  addScoreNone = (e, id) => {
+    const questionCard = document.getElementById(id)
+    questionCard.style.display = "none";
   }
 
   render() {
@@ -67,10 +73,21 @@ export default class Board extends Component {
           <div className="col-2"><h5 align="center">Category 4</h5></div>
           <div className="col-2"><h5 align="center">Category 5</h5></div>
           <div className="col-2"><h5 align="center">Category 6</h5></div>
-          {this.props.questions.map((question,key) => <QuestionItem question={question} key={question.id} players={this.state.playerList} onAddScore={this.addScore}/>)}
+          {this.props.questions.map((question,key) => <QuestionItem question={question} key={question.id} players={this.state.playerList} onAddScore={this.addScore} onAddScoreNone={this.addScoreNone}/>)}
         </div>
         <div className="row">
-        {this.state.playerList.map((player) => <PlayerScore player={player}/>)}
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Score</th>
+            </tr>
+          </thead>
+          <tbody>
+          {this.state.playerList.map((player, key) => <PlayerScore player={player} key={key}/>)}
+          </tbody>
+        </table>
+        
         </div>
       </div>
     )
