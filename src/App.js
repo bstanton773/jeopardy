@@ -3,6 +3,7 @@ import Navigation from './Components/Navigation'
 import Home from './Components/Home'
 import SingleJeopardy from './Components/SingleJeopardy'
 import DoubleJeopardy from './Components/DoubleJeopardy'
+import Scoreboard from './Components/Scoreboard'
 
 import {Switch, Route} from 'react-router-dom';
 
@@ -14,7 +15,8 @@ class App extends Component {
     super()
 
     this.state = {
-      playerList: []
+      playerList: [],
+      showScoreboard: false
     }
   }
 
@@ -37,6 +39,7 @@ class App extends Component {
     this.setState(({
       playerList: players
     }))
+    this.setState({showScoreboard: true})
   }
 
   addScore = (e, points, player, id) => {
@@ -63,9 +66,10 @@ class App extends Component {
         <div className="container">
         <Switch>
           <Route exact path="/" render={() => <Home onSumbitPlayer={this.submitPlayer}/>}></Route>
-          <Route exact path="/single" render={() => <SingleJeopardy questions={questions} onAddScore={this.addScore} onAddScoreNone={this.addScoreNone} playerList={this.state.playerList} />}></Route>
-          <Route exact path="/double" render={() => <DoubleJeopardy questions={doubleclues} onAddScore={this.addScore} onAddScoreNone={this.addScoreNone} playerList={this.state.playerList}/>}></Route>          
+          <Route exact path="/single" render={() => <SingleJeopardy questions={questions} onAddScore={this.addScore} onAddScoreNone={this.addScoreNone} playerList={this.state.playerList} scoreboard={this.state.showScoreboard}/>}></Route>
+          <Route exact path="/double" render={() => <DoubleJeopardy questions={doubleclues} onAddScore={this.addScore} onAddScoreNone={this.addScoreNone} playerList={this.state.playerList} scoreboard={this.state.showScoreboard}/>}></Route>          
         </Switch>
+        {this.state.showScoreboard ? <Scoreboard playerList={this.state.playerList}/> : null}
         </div>
       </div>
     );
