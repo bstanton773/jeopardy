@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import Navigation from './Components/Navigation'
-import Board from './Components/Board'
+import Home from './Components/Home'
+import SingleJeopardy from './Components/SingleJeopardy'
 import DoubleJeopardy from './Components/DoubleJeopardy'
+
+import {Switch, Route} from 'react-router-dom';
 
 import questions from './static/data/questions'
 import doubleclues from './static/data/doubleclues'
@@ -57,8 +60,13 @@ class App extends Component {
     return (
       <div className="App">
         <Navigation />
-        <Board questions={questions} onAddScore={this.addScore} onAddScoreNone={this.addScoreNone} playerList={this.state.playerList} onSumbitPlayer={this.submitPlayer}/>
-        <DoubleJeopardy questions={doubleclues} onAddScore={this.addScore} onAddScoreNone={this.addScoreNone} playerList={this.state.playerList}/>
+        <div className="container">
+        <Switch>
+          <Route exact path="/" render={() => <Home onSumbitPlayer={this.submitPlayer}/>}></Route>
+          <Route exact path="/single" render={() => <SingleJeopardy questions={questions} onAddScore={this.addScore} onAddScoreNone={this.addScoreNone} playerList={this.state.playerList} />}></Route>
+          <Route exact path="/double" render={() => <DoubleJeopardy questions={doubleclues} onAddScore={this.addScore} onAddScoreNone={this.addScoreNone} playerList={this.state.playerList}/>}></Route>          
+        </Switch>
+        </div>
       </div>
     );
   }
