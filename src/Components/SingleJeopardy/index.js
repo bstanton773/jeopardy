@@ -17,7 +17,7 @@ export default class SingleJeopardy extends Component {
           <div className="col-2"><h5 align="center">Category 6</h5></div>
           {this.props.questions.map((question,key) => <QuestionItem question={question} key={question.id} players={this.props.playerList} onAddScore={this.props.onAddScore} onAddScoreNone={this.props.onAddScoreNone}/>)}
         </div>
-        {this.props.showScoreboard ? <Scoreboard playerList={this.state.playerList}/> : null}
+        {this.props.scoreboard ? <Scoreboard playerList={this.props.playerList}/> : null}
       </div>
     )
   }
