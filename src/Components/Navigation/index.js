@@ -6,7 +6,7 @@ export default class Navigation extends Component {
     return (
       <div>
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
-        <a className="navbar-brand" href=" ">Jeopardy!</a>
+        <a className="navbar-brand" href="/">Jeopardy!</a>
         <button className="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -21,6 +21,9 @@ export default class Navigation extends Component {
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/double">Double Jeopardy</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/final">Final Jeopardy</NavLink>
             </li>
           </ul>
         </div>

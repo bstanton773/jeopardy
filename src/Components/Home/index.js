@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Scoreboard from '../Scoreboard'
 
 export default class Home extends Component {
   render() {
@@ -16,6 +17,7 @@ export default class Home extends Component {
             <div className="col-2"></div>
           </div>
         </form>
+        {this.props.scoreboard ? <Scoreboard playerList={this.props.playerList}/> : null}
       </div>
     )
   }
